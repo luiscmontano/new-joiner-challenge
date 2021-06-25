@@ -1,7 +1,6 @@
 import json
 import urllib.parse
 import boto3
-import PyPDF2
 
 print('Loading function')
 
