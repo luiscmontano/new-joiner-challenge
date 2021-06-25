@@ -18,7 +18,7 @@ def lambda_handler(event, context):
         pdfReader = PyPDF2.PdfFileReader(io.BytesIO(file))
         firstPage = pdfReader.getPage(0)
         firstPageText = firstPage.extractText()
-        #print(firstPageText)
+        print(firstPageText)
         
         print("CONTENT TYPE: " + response['ContentType'])
         return "All is OK"
