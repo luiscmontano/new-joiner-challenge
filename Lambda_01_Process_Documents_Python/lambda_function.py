@@ -34,13 +34,13 @@ def getString(str, strFrom, strTo):
 
 def generateJoiner(fileContent):
     
-    identificationNumber = getStringWithoutSpaces(fileContent, "Identification Number", "Name")
+    identificationNumber = int(getStringWithoutSpaces(fileContent, "Identification Number", "Name"))
     name = getStringWithoutSpaces(fileContent, "Name", "Last Name")
     lastName = getStringWithoutSpaces(fileContent, "Last Name", "Stack")
     stack = getString(fileContent, "Stack", "Role")
     role = getStringWithoutSpaces(fileContent, "Role", "English Level")
     englishLevel = getStringWithoutSpaces(fileContent, "English Level", "Domain Experience")
-    domainExperience = getStringWithoutSpaces(fileContent, "Domain Experience", "")
+    domainExperience = getString(fileContent, "Domain Experience", "$")
     
     message = {
         "identificationNumber": identificationNumber,
@@ -68,6 +68,7 @@ def lambda_handler(event, context):
     fileContent = getFileContent(event);
     
     message = generateJoiner(fileContent)
+    print(message)
     
     sentMessageToQueue(message)
     
