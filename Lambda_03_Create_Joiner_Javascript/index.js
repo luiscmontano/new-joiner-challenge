@@ -7,8 +7,7 @@ exports.handler = async (event) => {
     
     var body = event.Records ? JSON.parse(event.Records[0].body) : event.body;
     var joiner = JSON.parse(body);
-    
-    joiner.id = new Date().getTime();
+
     await dynamo.put({
         TableName: "Joiner",
         Item: joiner
