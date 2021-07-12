@@ -37,6 +37,7 @@ type Task struct{
 	EstimatedRequiredHours int16 `json:"estimatedRequiredHours"`
 	Stack string `json:"stack"`
 	MinRole []string `json:"minRole"`
+	ResourceId string `json:"resourceId"`
 }
 
 
