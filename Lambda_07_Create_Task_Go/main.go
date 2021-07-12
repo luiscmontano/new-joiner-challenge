@@ -30,9 +30,13 @@ import (
 )
 
 type Task struct{
+	ParentTaskId string `json:"parentTaskId"`
 	Id string `json:"id"`
 	Name string `json:"name"`
-	Subtasks []*Task `json:"subtasks"`
+	Description string `json:"description"`
+	EstimatedRequiredHours int16 `json:"estimatedRequiredHours"`
+	Stack string `json:"stack"`
+	MinRole []string `json:"minRole"`
 }
 
 
