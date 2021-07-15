@@ -33,6 +33,7 @@ type Task struct{
     Stack string `json:"stack"`
     MinRole []string `json:"minRole"`
     ResourceId string `json:"resourceId"`
+    Status string `json:"status"`
 }
 
 
