@@ -1,16 +1,11 @@
-// main.go
 /*
-
-https://github.com/aws/aws-lambda-go
+Generate ZIP
 
 set GOOS=linux
 set GOARCH=amd64
 set CGO_ENABLED=0
 go build -o main main.go
 %USERPROFILE%\Go\bin\build-lambda-zip.exe -o main.zip main
-
-https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/go/example_code/dynamodb
-
 */
 
 package main
@@ -68,18 +63,13 @@ func Handler(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse,
         Region: aws.String("us-east-2")},
     )
 
-    // Create DynamoDB client
     svc := dynamodb.New(sess)
-    // snippet-end:[dynamodb.go.create_item.session]
 
     av, err := dynamodbattribute.MarshalMap(task)
     if err != nil {
         log.Fatalf("Got error marshalling new task item: %s", err)
     }
-    // snippet-end:[dynamodb.go.create_item.assign_struct]
-
-    // snippet-start:[dynamodb.go.create_item.call]
-    // Create item in table Movies
+    
     tableName := "Task"
 
     input := &dynamodb.PutItemInput{

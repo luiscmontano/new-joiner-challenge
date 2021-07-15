@@ -3,7 +3,6 @@ const dynamo = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = async (event) => {
 
-    //console.log("Joiner: " + JSON.stringify(event, null, 4));
     console.log(" ------ Delete Joiner [START]:  " + new Date().toLocaleTimeString());
     
     var id = parseInt(event.pathParameters.id, 10);

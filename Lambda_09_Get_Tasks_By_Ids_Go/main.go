@@ -1,16 +1,11 @@
-// main.go
 /*
-
-https://github.com/aws/aws-lambda-go
+Generate ZIP
 
 set GOOS=linux
 set GOARCH=amd64
 set CGO_ENABLED=0
 go build -o main main.go
 %USERPROFILE%\Go\bin\build-lambda-zip.exe -o main.zip main
-
-https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/go/example_code/dynamodb
-
 */
 
 package main
@@ -20,10 +15,8 @@ import (
     "github.com/aws/aws-sdk-go/aws/session"
     "github.com/aws/aws-sdk-go/service/dynamodb"
     "github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
-    //*"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
     "github.com/aws/aws-lambda-go/lambda"
     "github.com/aws/aws-lambda-go/events"
-    //"github.com/aws/aws-sdk-go/service/dynamodb/expression"
     "net/http"
     "encoding/json"
 
@@ -67,9 +60,6 @@ func Handler(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse,
         panic(err)
     }
 
-    //proj := expression.NamesList(expression.Name("id"))
-    //expr, err := expression.NewBuilder().WithProjection(proj).Build()
-
     svc := dynamodb.New(sess)
 
     taskIDs := []string { param1 }
@@ -81,9 +71,6 @@ func Handler(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse,
             "id": &dynamodb.AttributeValue{
                 S: aws.String(task),
             },
-            /*"attr": &dynamodb.AttributeValue{
-                S: aws.String("task"),
-            },*/
         })
     }
 
@@ -107,8 +94,6 @@ func Handler(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse,
             if err != nil {
                 panic(fmt.Errorf("failed to unmarshall task from dynamodb response, err: %w", err))
             }
-
-            //tasks = append(tasks, task)
         }
     }
 
@@ -126,7 +111,6 @@ func Handler(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse,
     }
 
     return response(string(outToJson), http.StatusOK), nil
-    //return response(out.Items, http.StatusOK), nil
 }
 
 func response(body string, statusCode int) events.APIGatewayProxyResponse {
